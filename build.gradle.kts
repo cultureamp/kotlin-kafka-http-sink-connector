@@ -1,5 +1,5 @@
 plugins {
-    kotlin("multiplatform") version "1.4.0"
+    kotlin("jvm") version "1.4.0"
 }
 group = "me.user"
 version = "1.0-SNAPSHOT"
@@ -8,14 +8,14 @@ repositories {
     mavenCentral()
 }
 kotlin {
-    jvm {
-        compilations.all {
-            kotlinOptions.jvmTarget = "1.8"
-        }
-    }
     sourceSets {
-        val jvmMain by getting
-        val jvmTest by getting {
+        val main by getting {
+            dependencies {
+                implementation("org.apache.kafka:connect-api:2.6.0")
+                implementation("org.apache.kafka:kafka-clients:2.6.0")
+            }
+        }
+        val test by getting {
             dependencies {
                 implementation(kotlin("test-junit"))
             }
