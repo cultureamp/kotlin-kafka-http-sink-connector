@@ -15,6 +15,8 @@ kotlin {
             dependencies {
                 implementation("org.apache.kafka:connect-api:2.6.0")
                 implementation("org.apache.kafka:kafka-clients:2.6.0")
+                implementation("com.github.kittinunf.fuel:fuel:2.2.3")
+                implementation("com.github.kittinunf.result:result:3.1.0")
                 implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.0")
             }
         }
