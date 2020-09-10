@@ -1,3 +1,5 @@
+import org.gradle.jvm.tasks.Jar
+
 plugins {
     kotlin("jvm") version "1.4.0"
 }
@@ -13,6 +15,7 @@ kotlin {
             dependencies {
                 implementation("org.apache.kafka:connect-api:2.6.0")
                 implementation("org.apache.kafka:kafka-clients:2.6.0")
+                implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.0")
             }
         }
         val test by getting {
@@ -26,4 +29,6 @@ tasks.withType<Jar> {
     manifest {
         attributes["Main-Class"] = "com.cultureamp.kotlin_kafka_http_sink_connector.MainKt"
     }
+    // We want a "fat jar" with all dependencies bundled in.
+    from(configurations.compileClasspath.map { config -> config.map { if (it.isDirectory) it else zipTree(it) } })
 }
